@@ -1,4 +1,7 @@
 {
-    "python.linting.prospectorEnabled": true,
-    "python.pythonPath": "venv/bin/python"
+    "python.pythonPath": "venv/bin/python",
+    "editor.rulers": [
+        80
+    ],
+    "python.linting.prospectorEnabled": true
 }

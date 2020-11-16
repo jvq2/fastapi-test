@@ -1,26 +1,16 @@
-from typing import Optional
+from fastapi import FastAPI, Depends
 
-from fastapi import FastAPI
-from pydantic import BaseModel
+from app.auth import requires_user
+from app.config import APP_CONFIG
+from app.utils.database import init_db_conn
+from app.routers import root, items, users, ensure_indexes, token
+
+init_db_conn(APP_CONFIG)
 
 app = FastAPI()
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: Optional[bool] = None
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World!!"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
+app.include_router(root.router)
+app.include_router(token.router)
+app.include_router(items.router)
+app.include_router(users.router, dependencies=[Depends(requires_user)])
+app.include_router(ensure_indexes.router)

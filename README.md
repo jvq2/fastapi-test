@@ -8,6 +8,10 @@ The project requester asked for me to focus on the following items:
 * asyncio
 * mongoengine
 
+### Notes
+#### Mongoengine
+It appears `mongoengine` does not support `asyncio`. In order to fully leverage `asyncio`, it may be worth while to look into something like `motorengine`. But since `mongoengine` was requested to be used, we will stick with it.
+
 ----
 ## Setup
 ### Install docker / docker-compose

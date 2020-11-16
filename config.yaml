@@ -1,0 +1,3 @@
+database:
+    host: mongo
+    port: 27017
