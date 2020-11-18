@@ -1,6 +1,10 @@
+from .base import BaseDocument
 from .user import User
+from .pytest_run import TestRun
 
 
 __all__ = [
-    'User'
+    'BaseDocument',
+    'User',
+    'TestRun'
 ]

@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-from mongoengine import Document, ListField, StringField, EmailField
+from mongoengine import ListField, StringField, EmailField
 
 from app.exceptions import NotFound
+from app.models.base import BaseDocument
 
 
-class User(Document):
-    meta = {"indexes": ["email"]}
+class User(BaseDocument):
+    meta = {'indexes': ['email']}
     email = EmailField(required=True)
     first_name = StringField(max_length=50)
     last_name = StringField(max_length=50)
@@ -21,14 +22,6 @@ class User(Document):
         :returns User:
         """
         return cls.by_attr(id=_id)
-        # query = cls.objects(id=_id)
-
-        # if not query.count():
-        #     raise NotFound()
-
-        # return query[0]
-
-        # return cls.objects(id=_id)[0]
 
     @classmethod
     def by_email(cls, email: str) -> User:
@@ -38,12 +31,6 @@ class User(Document):
         :returns User:
         """
         return cls.by_attr(email=email)
-        # query = cls.objects(email=email)
-
-        # if not query.count():
-        #     raise NotFound()
-
-        # return query[0]
 
     @classmethod
     def by_attr(cls, **kwargs) -> User:

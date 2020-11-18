@@ -8,6 +8,8 @@ router = APIRouter()
 
 @router.get("/")
 async def read_root():
+    """Root of the application that does nothing
+    """
     proc = await asyncio.create_subprocess_exec(
         "echo", "World!",
         stdout=asyncio.subprocess.PIPE
@@ -15,8 +17,3 @@ async def read_root():
     stdout, _ = await proc.communicate()
 
     return {"Hello": stdout.strip()}
-
-
-# @router.get("/foo")
-# async def read_foo():
-#     return {"Hello": "foo"}
